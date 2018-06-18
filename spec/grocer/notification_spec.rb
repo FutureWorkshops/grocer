@@ -29,6 +29,11 @@ describe Grocer::Notification do
       notification.category = 'a different category'
       expect(payload[:aps][:category]).to eq('a different category')
     end
+    
+    it 'encodes thread id as part of the payload' do
+      notification.thread_id = 'threadid_abc123'
+      expect(payload[:aps][:'thread-id']).to eq('threadid_abc123')
+    end
 
     it 'encodes custom payload attributes' do
       notification.custom = { :foo => 'bar' }
